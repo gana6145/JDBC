@@ -40,7 +40,7 @@ public class TrainerOperation {
 	
 	
 	public static void fetchData() throws SQLException {
-		PreparedStatement stm=con.prepareStatement("select * from trainer");
+		PreparedStatement stm=con.prepareStatement("select * from trainer order by id");
 		ResultSet rs=stm.executeQuery();
 		
 		while(rs.next()) {
@@ -50,7 +50,7 @@ public class TrainerOperation {
 	}
 	
 	
-	public static void fetchBYId() throws SQLException {
+	public static void fetchById() throws SQLException {
 		PreparedStatement stm=con.prepareStatement("select * from trainer where id=?");
 		System.out.println("Enter the trainer id:");
 		stm.setInt(1,scan.nextInt());
@@ -80,6 +80,14 @@ public class TrainerOperation {
 		stm.setDouble(1, scan.nextDouble());
 		System.out.println(stm.executeUpdate()+ " rows affected");
 	}
+	public static void updateSubject() throws SQLException {
+		PreparedStatement stm=con.prepareStatement("update trainer set subject=? where id=?");
+		System.out.println("Enter the trainer id:");
+		stm.setInt(2, scan.nextInt());
+		System.out.println("Enter the name of the subject:");
+		stm.setString(1, scan.next());
+		System.out.println(stm.executeUpdate()+ " rows affected");
+	}
 	
 	
 	public static void deleteById() throws SQLException {
@@ -90,13 +98,49 @@ public class TrainerOperation {
 		System.out.println(n+" rows affected");
 	}
 	
+	public static void updateUserInfo() throws SQLException {
+		System.out.println("Enter the choice what u want to update:");
+		System.out.println("Enter 1 for the update name");
+		System.out.println("Enter 2 for the update sal");
+		System.out.println("Enter 3 for the update subject");
+		int num=scan.nextInt();
+		switch(num) {
+		case 1:{
+			updateName();
+			break;
+			
+		}
+        case 2:{
+        	updateSallary();
+        	break;
+			
+		}
+        case 3:{
+        	updateSubject();
+        	break;
+        }
+       default:{
+    	   System.out.println("invalid choice");
+    	   break;
+       }
+		
+		}
+		
+	}
+	
+	
+	public static void closeConnection() throws SQLException {
+		con.close();
+		System.out.println("connection close successfully");
+	}
+	
 	
 	
 
 	public static void main(String[] args) {
 		try {
-			updateSallary();
-		
+			updateUserInfo();
+							
 			
 		} catch (SQLException e) {
 			
