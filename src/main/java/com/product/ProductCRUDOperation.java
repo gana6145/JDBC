@@ -116,21 +116,49 @@ public class ProductCRUDOperation {
 		  System.out.println("connection closes.");
 		  
 	  }
+	  
+	  
 			
-		
+		public static void whatYouWantToDo() throws SQLException {
+			System.out.println("Enter 1 for the insert the product, 2 for the insert product using the stored procedure,3 for the find by id 4 th for the find all.");
+			int choice;
+			while(true) {
+				System.out.println("Enter the choice:");
+				choice=scan.nextInt();
+	           switch(choice)	{
+	           case 1:{
+	        	   insertProduct();
+	        	   break;
+	           }
+	           case 2:{
+	        	   insertProducts();
+	        	   break;
+	           }
+	           case 3:{
+	        	   findById();
+	        	   break;
+	           }
+	           case 4:{
+	        	   
+	        	   findAll();
+	        	   break;
+	           }
+	           default:{
+	        	   break;
+	        	   
+	           }
+	           }
+	           System.out.println("Thank you:");
+	           return;
+			}
+		}
 	  
 	  
 	public static void main(String[] args) {
 		
 		try {
-//			insertProduct();
-////			updateProductPrice();
-////			deleteProduct();
-////			findById();
-//			findAll();
-			insertProducts();
-//			findByPrice();
-			closeConnection();
+			whatYouWantToDo();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
